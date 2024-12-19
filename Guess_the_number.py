@@ -1,5 +1,6 @@
 import random
 from validate_numbers import Validate
+import subprocess #to run the different files
 
 def user_input_validation(user_input):
     # Validate if input is a digit
@@ -56,7 +57,21 @@ def check_number(random_number, length_of_random_number):
             print(f"You have {attempt} attempts left.")
 
 if __name__ == "__main__":
-    random_number = get_random_number()
-    length_of_random_number = digit_length(random_number)
-    check_number(random_number, length_of_random_number)
+    while True:
+        # Check for command-line arguments
+        mode = input("Please enter mode of the game: 0 for terminal or 1 for GUI. ")
+        if mode == "0":  # Terminal mode
+            # Run the terminal game file
+            random_number = get_random_number()
+            length_of_random_number = digit_length(random_number)
+            check_number(random_number, length_of_random_number)
+            break
+        elif mode == "1":  # GUI mode
+            # Run the GUI game file
+            subprocess.run(["python", "Guess_the_number_GUI.py"])
+            break
+            
+        else:
+            print("Invalid mode. Use 0 for terminal or 1 for GUI.")
+
 
